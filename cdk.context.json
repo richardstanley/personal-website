@@ -1,0 +1,10 @@
+{
+  "hosted-zone:account=554542345720:domainName=richardstanley.net:region=us-east-1": {
+    "Id": "/hostedzone/Z0784822GJ2CGMRKGYB7",
+    "Name": "richardstanley.net."
+  },
+  "hosted-zone:account=554542345720:domainName=richardstanley.net:region=us-west-2": {
+    "Id": "/hostedzone/Z0784822GJ2CGMRKGYB7",
+    "Name": "richardstanley.net."
+  }
+}
