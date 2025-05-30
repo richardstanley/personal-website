@@ -215,16 +215,16 @@ a:hover {
 }
 
 .project-card {
-    background-color: #fff; /* Kept */
+    background-color: #fff;
     padding: 25px;
     border-radius: 8px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.06); /* Updated shadow */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.06);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .project-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); /* Updated shadow */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
 }
 
 .project-card h3 {
@@ -233,7 +233,7 @@ a:hover {
 }
 
 .project-card strong {
-    color: #2F353A; /* Updated */
+    color: #2F353A;
 }
 
 /* Resume & Contact Section */
