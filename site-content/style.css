@@ -14,7 +14,9 @@ body {
     font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
     color: #111; /* more black, like MTG card text */
-    background: linear-gradient(135deg, #D6D7D9 0%, #BFC2C7 100%); /* subtle artifact grey gradient */
+    background: linear-gradient(135deg, #D6D7D9 0%, #E3E4E8 40%, #BFC2C7 100%, #E3E4E8 160%);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
     padding-top: 70px;
 }
 
