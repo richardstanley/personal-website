@@ -1,6 +1,26 @@
+# Source files
 *.ts
 !*.d.ts
 
-# CDK asset staging directory
-.cdk.staging
-cdk.out
+# Test files
+test/
+jest.config.js
+
+# Build output
+lib/
+cdk.out/
+.cdk.staging/
+
+# Development files
+.git/
+.github/
+.vscode/
+*.log
+.DS_Store
+
+# CDK specific
+cdk.context.json
+cdk.json
+
+# Site content
+site-content/ 
