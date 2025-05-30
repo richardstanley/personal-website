@@ -13,9 +13,9 @@ html {
 body {
     font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
-    color: #111;
-    background: linear-gradient(#D6D7D9, #BFC2C7);
-    padding-top: 70px; /* Account for fixed header */
+    color: #111; /* more black, like MTG card text */
+    background: linear-gradient(135deg, #D6D7D9 0%, #BFC2C7 100%); /* subtle artifact grey gradient */
+    padding-top: 70px;
 }
 
 .container {
@@ -28,7 +28,7 @@ body {
 h1, h2, h3 {
     margin-bottom: 0.8em;
     font-family: 'Merriweather', serif;
-    color: #2E86C1;
+    color: #111; /* more black, like MTG card headers */
 }
 
 h1 {
@@ -47,7 +47,7 @@ h3 {
 
 p {
     margin-bottom: 1em;
-    color: #111;
+    color: #111; /* more black, like MTG card text */
 }
 
 a {
@@ -61,15 +61,16 @@ a:hover {
 
 /* Header & Navigation */
 #header {
-    background-color: #D6D7D9;
-    color: #111;
+    background: linear-gradient(180deg, #FDFBF6 80%, #E8E3D3 100%); /* parchment white gradient */
+    color: #212529;
+    border-bottom: 2px solid #111; /* thinner black border */
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
     padding: 10px 0;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     z-index: 1000;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Updated shadow */
     transition: background-color 0.3s ease;
 }
 
@@ -80,12 +81,14 @@ a:hover {
     width: 90%;
     max-width: 1100px;
     margin: auto;
+    border-bottom: none;
 }
 
 #header .logo a {
     font-size: 1.8em;
     font-weight: bold;
-    color: #2E86C1;
+    color: #111; /* more black for the site name */
+    font-family: 'Merriweather', serif;
 }
 
 #header .nav-links {
@@ -98,7 +101,7 @@ a:hover {
 }
 
 #header .nav-links a {
-    color: #111;
+    color: #111; /* more black for nav links */
     font-weight: 500;
     padding: 5px 0;
     position: relative;
@@ -126,7 +129,7 @@ a:hover {
 
 #header .nav-links a:hover,
 #header .nav-links a.active {
-    color: #5DADE2;
+    color: #2E86C1;
 }
 
 .burger {
@@ -144,28 +147,34 @@ a:hover {
 
 /* Hero Section */
 .hero-section {
-    background: linear-gradient(rgba(46, 134, 193, 0.7), rgba(46, 134, 193, 0.9)), url('placeholder-hero-bg.jpg') no-repeat center center/cover;
+    background: linear-gradient(135deg, #5DADE2 0%, #2E86C1 100%);
     color: #fff;
+    border: 2px solid #111;
+    border-radius: 12px;
+    margin: 32px 0 32px 0;
+    box-shadow: 0 4px 16px rgba(46,134,193,0.10);
+    padding: 48px 32px 40px 32px;
     height: calc(100vh - 70px); /* Full viewport height minus header */
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
-    padding: 0 20px;
+}
+
+.hero-section h1, .hero-section h2 {
+    color: #fff;
+    text-shadow: 0 2px 8px rgba(46,134,193,0.10);
 }
 
 .hero-section h1 {
     font-size: 3.5em;
     margin-bottom: 0.3em;
-    color: #fff; /* Kept */
 }
 
 .hero-section h2 {
     font-size: 1.8em;
     margin-bottom: 0.5em;
-    color: #E0F2FE; /* Updated - Light blue/off-white for better contrast on new gradient */
-    text-align: center;
 }
 
 .hero-section .tagline {
@@ -178,9 +187,12 @@ a:hover {
 .content-section {
     padding: 60px 0;
     background-color: #FAF8F0;
-    border: 1px solid #111;
-    border-radius: 6px;
+    border: 1.5px solid #111;
+    border-radius: 10px;
     margin-bottom: 40px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    padding: 48px 32px 40px 32px;
+    background: linear-gradient(180deg, #FDFBF6 90%, #E8E3D3 100%);
 }
 
 .content-section.alt-bg {
@@ -190,17 +202,19 @@ a:hover {
 /* About Section */
 .about-content {
     display: flex;
-    align-items: flex-start; /* Align items to the top */
-    gap: 30px; /* Space between image and text */
+    align-items: center; /* Center vertically */
+    gap: 30px;
 }
 
 .profile-pic {
+    align-self: center;
+    margin-bottom: 0;
     width: 200px; /* Adjust as needed */
     height: 200px;
     border-radius: 50%; /* Circular image */
     object-fit: cover; /* Ensure the image covers the area without distortion */
-    border: 2px solid #111;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    border: 1.5px solid #111;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.10);
 }
 
 .about-content div {
@@ -215,11 +229,12 @@ a:hover {
 }
 
 .project-card {
-    background-color: #FAF8F0;
-    padding: 25px;
+    background: linear-gradient(135deg, #E8E9EB 80%, #BFC2C7 100%);
+    border: 1.5px solid #111;
     border-radius: 8px;
-    border: 1px solid #111;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.06);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    padding: 36px 28px 28px 28px;
+    margin-bottom: 24px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -229,8 +244,9 @@ a:hover {
 }
 
 .project-card h3 {
-    color: #2E86C1;
-    margin-bottom: 0.5em;
+    color: #111; /* more black for project card headers */
+    font-family: 'Merriweather', serif;
+    margin-bottom: 0.7em;
 }
 
 .project-card strong {
@@ -252,22 +268,23 @@ a:hover {
 /* Buttons */
 .cta-button, .contact-link-btn {
     display: inline-block;
-    background-color: #2E86C1;
-    color: #fff;
+    background: linear-gradient(135deg, #E8E9EB 80%, #BFC2C7 100%); /* artifact grey gradient */
+    color: #111;
+    border: 1.5px solid #111;
     padding: 12px 25px;
     border-radius: 5px;
     font-weight: bold;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Kept */
+    transition: background 0.3s ease, color 0.2s, transform 0.2s;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
 .cta-button:hover, .contact-link-btn:hover {
-    background-color: #5DADE2;
-    color: #fff; /* Kept */
+    background: linear-gradient(135deg, #BFC2C7 0%, #E8E9EB 100%);
+    color: #2E86C1;
     transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.15); /* Kept */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
 }
 
 .contact-link-btn {
@@ -280,23 +297,25 @@ a:hover {
 
 /* Footer */
 #footer {
-    background-color: #2E86C1;
-    color: #E0F2FE; /* Updated */
+    background: linear-gradient(180deg, #5DADE2 80%, #2E86C1 100%);
+    color: #111;
     text-align: center;
     padding: 30px 0;
+    border-top: 2px solid #111;
+    box-shadow: 0 -2px 8px rgba(46,134,193,0.10);
 }
 
 #footer p {
     margin-bottom: 0.5em;
-    color: #B3D4EE; /* Updated */
+    color: #111;
 }
 
 #footer a {
-    color: #FFFFFF; /* Updated */
+    color: #111;
 }
 
 #footer a:hover {
-    color: #FDFBF6;
+    color: #2E86C1;
 }
 
 .back-to-top {
@@ -390,6 +409,13 @@ a:hover {
         margin: 5px;
         transition: all 0.3s ease;
     }
+
+    .content-section, #about.content-section, #projects.content-section, .hero-section {
+        padding: 28px 8px 24px 8px;
+    }
+    .project-card {
+        padding: 20px 8px 16px 8px;
+    }
 }
 
 /* Nav link animation */
@@ -402,4 +428,34 @@ a:hover {
         opacity: 1;
         transform: translateX(0px);
     }
+}
+
+/* HERO SECTION TEXT - Black Like Card */
+.hero-section h1, .hero-section h2, .hero-section .tagline, .hero-section a.cta-button {
+    color: #111;
+    text-shadow: none;
+}
+
+/* MILIARE REFERRAL PROJECT CARD - Match Hero Card Style */
+.project-card.miliare-referral {
+    background: linear-gradient(135deg, #5DADE2 0%, #2E86C1 100%);
+    border: 1.5px solid #111;
+    color: #111;
+}
+
+.project-card.miliare-referral h3,
+.project-card.miliare-referral p {
+    color: #111;
+}
+
+.project-card.miliare-referral a.cta-button {
+    background: linear-gradient(135deg, #E8E9EB 80%, #BFC2C7 100%);
+    color: #111;
+    border: 1.5px solid #111;
+}
+
+.project-card.miliare-referral a.cta-button:hover {
+    background: linear-gradient(135deg, #BFC2C7 0%, #E8E9EB 100%);
+    color: #2E86C1;
+    border: 1.5px solid #2E86C1;
 } 
