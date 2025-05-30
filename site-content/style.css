@@ -13,8 +13,8 @@ html {
 body {
     font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
-    color: #212529;
-    background: linear-gradient(#FEFEFE, #F8F9FA);
+    color: #111;
+    background: linear-gradient(#D6D7D9, #BFC2C7);
     padding-top: 70px; /* Account for fixed header */
 }
 
@@ -47,7 +47,7 @@ h3 {
 
 p {
     margin-bottom: 1em;
-    color: #5A656E; /* Updated */
+    color: #111;
 }
 
 a {
@@ -61,8 +61,8 @@ a:hover {
 
 /* Header & Navigation */
 #header {
-    background-color: #FFFFFF; /* Kept white */
-    color: #2F353A; /* Updated */
+    background-color: #D6D7D9;
+    color: #111;
     padding: 10px 0;
     position: fixed;
     top: 0;
@@ -98,7 +98,7 @@ a:hover {
 }
 
 #header .nav-links a {
-    color: #212529;
+    color: #111;
     font-weight: 500;
     padding: 5px 0;
     position: relative;
@@ -177,8 +177,8 @@ a:hover {
 /* Content Sections */
 .content-section {
     padding: 60px 0;
-    background-color: #FFFFFF;
-    border: 1px solid #CED4DA;
+    background-color: #FAF8F0;
+    border: 1px solid #111;
     border-radius: 6px;
     margin-bottom: 40px;
 }
@@ -199,8 +199,8 @@ a:hover {
     height: 200px;
     border-radius: 50%; /* Circular image */
     object-fit: cover; /* Ensure the image covers the area without distortion */
-    border: 5px solid #FFFFFF; /* Updated border to white */
-    box-shadow: 0 4px 10px rgba(0,0,0,0.08); /* Updated shadow */
+    border: 2px solid #111;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
 }
 
 .about-content div {
@@ -215,9 +215,10 @@ a:hover {
 }
 
 .project-card {
-    background-color: #fff;
+    background-color: #FAF8F0;
     padding: 25px;
     border-radius: 8px;
+    border: 1px solid #111;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.06);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
