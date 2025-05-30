@@ -1,58 +1,52 @@
-**AI Coding/Developer Prompt: Subtle MTG Refresh - "2010 Era Blue/White" Inspired**
+**AI Coding/Developer Prompt: MTG 2010 Era - Artifact/White/Blue Card Frame Inspired**
 
 **Objective:**
-Subtly refresh the styling of the personal professional website `richardstanley.net/` to incorporate understated "Easter egg" elements hinting at an appreciation for Magic: The Gathering, specifically the aesthetic of **Blue and White cards from the M10 (Magic 2010) era and its contemporary sets.** The design must remain impeccably professional, modern, and appropriate for a CTO in the fintech industry (mortgage, real estate, insurance, personal financial advice). The goal is a unique, sophisticated site where enthusiasts of that MTG era might catch a subtle nod, while others simply see a well-designed professional page.
+Refresh the styling of the personal professional website `richardstanley.net/` to subtly evoke the look and feel of 2010 era Magic: The Gathering cards, specifically the black-bordered frames of artifact, white, and blue cards. The design must remain highly professional, modern, and appropriate for a CTO in the fintech industry. The goal is a unique, sophisticated site where MTG enthusiasts will recognize the inspiration, while others see a clean, well-designed professional page.
 
-**Current Website Structure Overview (richardstanley.net):**
+**Current Website Structure Overview:**
 * Single-page layout with anchor links.
-* Sections: Hero (Name, Title, Intro), About Me (Image, Bio), Resume (Download Link), Contact (LinkedIn, GitHub).
+* Sections: Hero (Name, Title, Intro), About Me (Image, Bio), Projects, Contact.
 
-**Core Principle: Subtlety and Professionalism are Paramount**
-* Thematic elements must be abstract interpretations, not literal.
+**Core Principle: Subtlety and Professionalism**
+* Thematic elements must be abstract, not literal.
 * Maintain high readability, accessibility, and a clean user experience.
-* Enhance, don't undermine, the existing professional tone. The feel should be one of order, clarity, intelligence, and precision.
+* Enhance, don't undermine, the professional tone. The feel should be one of order, clarity, intelligence, and precision.
 
-**Styling Instructions - Inspired by "2010 Era Blue/White MTG":**
+**Styling Instructions - Inspired by 2010 Era Artifact/White/Blue MTG Cards:**
 
-1.  **Color Palette - Clean, Controlled, with Blue & White Dominance:**
-    * **Primary Background (Evoking White's Purity/Order):** A crisp, clean off-white (e.g., `#F8F9FA`, `#FEFEFE`) or a very light, cool, almost luminous grey. This establishes a strong, orderly base.
-    * **Content Section Backgrounds (Subtle "Text Box" Feel):** To emulate the M10-era text box on a lighter card frame:
-        * If the primary background is a very light grey, content sections could be pure white.
-        * Alternatively, content sections could use a very light, fine parchment or vellum texture (e.g., a background image or CSS pattern that is extremely subtle, like `#FDFBF6` with a near-invisible noise or paper texture overlay). This should be barely perceptible.
-    * **Primary Text:** Dark charcoal or a very dark, desaturated slate blue (e.g., `#212529`, `#34495E`) for excellent contrast and a serious tone.
-    * **Blue Accents (Intellect, Control, Sky/Water):** Choose one or two sophisticated, clear blues for links, hover states, key call-to-action buttons, and subtle highlights. Think:
-        * A refined Sky Blue or Cerulean (e.g., `#5DADE2`, `#87CEEB` but ensure professional contrast).
-        * A deeper Sapphire or muted Navy (e.g., `#2E86C1`, `#005A9C`) for more grounded accents.
-    * **Silver/Light Cool Grey Accents (Order, Precision, Hint of Artifact):** For borders, icons, or secondary text (e.g., `#B0C4DE`, `#CED4DA`).
-    * **(Optional) Tertiary Pale Gold Hint:** If desired (and used *extremely* sparingly, like for a very specific highlight or a subtle border detail), a pale, desaturated gold could hint at Azorius (Blue/White guild) aesthetics.
-    * **Avoid:** Overly bright or saturated blues that might feel unprofessional.
+1.  **Color Palette - Artifact Gray, Parchment White, and Classic Blue:**
+    * **Primary Background (Artifact Gray):** Use a cool, metallic gray reminiscent of artifact cards (e.g., `#D6D7D9` or `#BFC2C7`).
+    * **Content Section Backgrounds (Parchment White):** Use a warm, parchment white inspired by white cards (e.g., `#FDFBF6` or `#FAF8F0`).
+    * **Primary Text:** Deep charcoal or black (`#111` or `#212529`) for strong contrast.
+    * **Blue Accents (2010 Blue Card):** Use a blue sampled from 2010 era blue cards (e.g., `#2E86C1` for main blue, `#5DADE2` for lighter blue accents).
+    * **Borders:** All major content sections and card-like elements must have a solid black border (`#111` or `#000`), echoing the iconic black-bordered MTG card frame. Use black borders for section framing, project cards, and any card-like UI element.
+    * **Silver/Light Cool Grey Accents:** For subtle dividers or secondary text (e.g., `#CED4DA`).
+    * **Avoid:** Overly bright or saturated colors that might feel unprofessional.
 
-2.  **Typography - Classic Clarity with a Touch of Authority:**
-    * **Main Name Heading ("Richard Stanley"):** A strong, clear serif font with good readability, reminiscent of M10-era card titles – less ornate than older styles but still classic (e.g., Garamond, Cambria, PT Serif, Merriweather).
-    * **Subtitle/Tagline:** A clean, modern sans-serif, or an italicized/slightly smaller version of the main heading font, possibly in an accent blue or grey.
-    * **Section Headings ("About Me," "Resume," etc.):** Consistent with the main name heading or a strong, complementary sans-serif (e.g., Open Sans, Lato, Montserrat).
-    * **Body Text:** Maintain a highly legible and clean sans-serif font (similar to current, or Roboto, Inter) for clarity and modern feel.
+2.  **Typography - Classic and Clear:**
+    * **Main Name Heading:** A strong, clear serif font reminiscent of card titles (e.g., Merriweather, Garamond).
+    * **Section Headings:** Consistent with the main heading or a strong, complementary sans-serif (e.g., Open Sans, Lato).
+    * **Body Text:** Highly legible sans-serif (e.g., Inter, Roboto).
 
-3.  **Layout & Structural Hints (Orderly & Defined):**
-    * **Section Framing ("Card Layers"):** Clearly define content sections.
-        * A thin, clean border in a silver/light cool grey or a subtle blue around each section.
-        * Generous padding within sections to ensure an uncluttered, "readable" feel, like a card's text box.
-    * **Hero Section:** Your name and title serve as the "card name." The "Learn More" button should use a chosen blue accent.
-    * **"About Me" Image:** A clean, defined border, perhaps in silver or a light blue.
+3.  **Layout & Borders:**
+    * **Section Framing:** Every content section should have a solid black border, mimicking the black-bordered box style of 2010 era MTG cards. This black border should be visually prominent but not overwhelming.
+    * **Project Cards:** Each project card must have a solid black border, reinforcing the card-like appearance and the MTG frame inspiration.
+    * **Profile Image:** Optionally, add a thin black border to the profile image for consistency with the card frame motif.
+    * **Generous Padding:** Ensure sections and cards have enough padding to feel like "text boxes" within a card frame.
 
-4.  **Subtle Visual Details (Hints of Magic/Order):**
-    * **Gradients (Very Subtle):** A very faint linear gradient (e.g., white to a very light sky blue, or light grey to a slightly lighter grey) on section backgrounds or the main page background to give a sense of depth or a subtle "glow" without being overt.
-    * **Hover Effects:** Links or buttons could have a smooth transition to a brighter shade of your accent blue or a subtle "glow" effect (e.g., a soft blue box-shadow).
-    * **Dividers:** If section dividers are needed, simple thin lines in silver or a light blue.
+4.  **Subtle Visual Details:**
+    * **Gradients:** Use very subtle gradients (e.g., parchment white to artifact gray, or blue to lighter blue) for depth, but keep them understated.
+    * **Hover Effects:** Links and buttons can use blue gradients or a soft blue glow on hover.
+    * **Dividers:** If needed, use thin black or silver lines.
 
 5.  **Iconography:**
-    * **Contact Icons (LinkedIn, GitHub):** Style consistently, perhaps using a silver or blue accent color on hover. Keep them clean and modern.
+    * **Contact Icons:** Style with blue or black on hover, keeping them clean and modern.
 
 **Implementation Notes for the Agent:**
-* Primarily CSS changes. Minimize HTML changes.
-* Focus on a bright, clean, orderly aesthetic overall (White influence) with strategic, intelligent use of Blue.
-* The M10 era was about clarity and slightly modernized classic fantasy. The design should feel structured, intelligent, and trustworthy.
-* Ensure all changes are responsive.
-* If any effect or texture (like parchment) feels too heavy or impacts readability, simplify it or remove it. The "hint" should be almost subconscious.
+* Focus on CSS changes; minimize HTML changes.
+* The black border motif should be present in at least three major places: section framing, project cards, and (optionally) the profile image.
+* The background should evoke artifact gray, content areas should use parchment white, and blue accents should match 2010 era blue cards.
+* Ensure all changes are responsive and maintain high readability.
+* If any effect or texture (like parchment) feels too heavy or impacts readability, simplify or remove it.
 
-This refined prompt should guide your agent in creating a professional website that subtly reflects your preference for the 2010 era blue and white MTG aesthetic.
+This prompt should guide your agent in creating a professional website that subtly but clearly reflects the black-bordered, artifact/white/blue card aesthetic of 2010 era Magic: The Gathering cards.
