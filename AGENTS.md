@@ -50,3 +50,18 @@ Refresh the styling of the personal professional website `richardstanley.net/` t
 * If any effect or texture (like parchment) feels too heavy or impacts readability, simplify or remove it.
 
 This prompt should guide your agent in creating a professional website that subtly but clearly reflects the black-bordered, artifact/white/blue card aesthetic of 2010 era Magic: The Gathering cards.
+
+### Current Implementation Snapshot
+
+* **Body Background:** Gradient from `#D6D7D9` to `#E3E4E8` for a metallic artifact feel.
+* **Header:** Parchment gradient (`#FDFBF6` to `#E8E3D3`) with a 2px black border.
+* **Hero Section:** Blue gradient (`#5DADE2` to `#2E86C1`) framed by a 2px black border.
+* **Content Sections:** Parchment gradient (`#FDFBF6` to `#E8E3D3`) with 1.5px black borders and subtle box shadows.
+* **Project Cards:** Artifact gray gradient (`#E8E9EB` to `#BFC2C7`) with 1.5px black borders, lifting slightly on hover.
+* **Profile Image:** Circular with a 1.5px black border and soft shadow.
+* **Typography:** Merriweather for headings, Inter for body text.
+* **Buttons:** Gradient fills with black borders that invert to blue on hover.
+* **Responsive Layout:** Burger navigation activates below 768px with sections and cards padded for smaller screens.
+
+Follow these patterns when extending the site so new components maintain the MTG-inspired aesthetic.
+
