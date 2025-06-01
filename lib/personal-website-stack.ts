@@ -11,6 +11,7 @@ import * as path from 'path';
 
 export interface PersonalWebsiteStackProps extends cdk.StackProps {
   domainName: string;
+  subdomainName?: string; // e.g., 'www'
   certificateArn: string; // ARN of the ACM certificate from us-east-1
 }
 
@@ -18,7 +19,8 @@ export class PersonalWebsiteStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props: PersonalWebsiteStackProps) {
     super(scope, id, props);
 
-    const { domainName, certificateArn } = props;
+    const { domainName, subdomainName, certificateArn } = props;
+    const siteDomain = subdomainName ? `${subdomainName}.${domainName}` : domainName;
     const wwwDomain = `www.${domainName}`;
 
     // 1. Look up the Route 53 hosted zone
