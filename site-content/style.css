@@ -263,7 +263,7 @@ a:hover {
 .contact-links {
     display: flex;
     justify-content: center;
-    gap: 20px;
+    gap: 40px;
     margin-top: 20px;
 }
 
@@ -284,17 +284,20 @@ a:hover {
 
 .cta-button:hover, .contact-link-btn:hover {
     background: linear-gradient(135deg, #BFC2C7 0%, #E8E9EB 100%);
-    color: #2E86C1;
+    color: #fff;
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(0,0,0,0.15);
 }
 
 .contact-link-btn {
-    background-color: #2E86C1;
+    background: linear-gradient(135deg, #5DADE2 0%, #2E86C1 100%);
+    color: #111;
+    border: 1.5px solid #111;
 }
 
 .contact-link-btn:hover {
-    background-color: #5DADE2;
+    background: linear-gradient(135deg, #B3D4EE 0%, #5DADE2 100%);
+    color: #111;
 }
 
 /* Footer */
@@ -464,11 +467,11 @@ a:hover {
 
 /* Professional Links Card */
 .professional-links-card {
-    background: linear-gradient(135deg, #5DADE2 0%, #2E86C1 100%);
-    border: 1.5px solid #111;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-    padding: 36px 28px 28px 28px;
+    background: none;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    padding: 0;
     margin-bottom: 24px;
     text-align: center;
 }

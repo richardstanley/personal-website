@@ -1,0 +1,30 @@
+<svg width="192" height="192" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <polygon
+    points="30,15 70,15 85,45 50,88 15,45"
+    fill="#187bcd"
+    stroke="#105E9B"
+    stroke-width="2"
+  />
+
+  <line x1="50" y1="15" x2="50" y2="50" stroke="#66aadd" stroke-width="2.5" />
+  <line x1="50" y1="15" x2="30" y2="30" stroke="#5098d7" stroke-width="2.5" />
+  <line x1="50" y1="15" x2="70" y2="30" stroke="#5098d7" stroke-width="2.5" />
+
+  <line x1="30" y1="15" x2="15" y2="45" stroke="#4088c6" stroke-width="2.5" />
+  <line x1="70" y1="15" x2="85" y2="45" stroke="#4088c6" stroke-width="2.5" />
+
+  <line x1="15" y1="45" x2="50" y2="88" stroke="#3077b5" stroke-width="2.5" />
+  <line x1="85" y1="45" x2="50" y2="88" stroke="#3077b5" stroke-width="2.5" />
+
+  <line x1="30" y1="30" x2="50" y2="50" stroke="#5098d7" stroke-width="2.5" />
+  <line x1="70" y1="30" x2="50" y2="50" stroke="#5098d7" stroke-width="2.5" />
+  <line x1="25" y1="40" x2="50" y2="50" stroke="#4088c6" stroke-width="2" />
+  <line x1="75" y1="40" x2="50" y2="50" stroke="#4088c6" stroke-width="2" />
+  <polygon points="50,20 40,35 50,45 60,35" fill="#aaddff" opacity="0.6"/>
+  <polygon points="50,80 35,50 50,60 65,50" fill="#88ccff" opacity="0.5"/>
+
+
+  <circle cx="48" cy="28" r="4" fill="#FFFFFF" opacity="0.75"/>
+  <ellipse cx="55" cy="25" rx="3.5" ry="1.5" fill="#FFFFFF" opacity="0.65" transform="rotate(-30 55 25)"/>
+
+</svg> 
