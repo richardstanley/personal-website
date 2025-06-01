@@ -460,4 +460,15 @@ a:hover {
     background: linear-gradient(135deg, #BFC2C7 0%, #E8E9EB 100%);
     color: #2E86C1;
     border: 1.5px solid #2E86C1;
-} 
+}
+
+/* Professional Links Card */
+.professional-links-card {
+    background: linear-gradient(135deg, #5DADE2 0%, #2E86C1 100%);
+    border: 1.5px solid #111;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    padding: 36px 28px 28px 28px;
+    margin-bottom: 24px;
+    text-align: center;
+}
