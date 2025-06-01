@@ -7,7 +7,6 @@ import { CertificateStack } from '../lib/certificate-stack';
 const app = new cdk.App();
 
 const domainName = 'richardstanley.net';
-const account = process.env.CDK_DEFAULT_ACCOUNT;
 const certificateRegion = 'us-east-1';
 const websiteRegion = 'us-west-2';
 
