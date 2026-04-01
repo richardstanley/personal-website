@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-import 'source-map-support/register';
 import * as cdk from 'aws-cdk-lib';
 import { PersonalWebsiteStack } from '../lib/personal-website-stack';
 import { CertificateStack } from '../lib/certificate-stack';
@@ -24,7 +23,7 @@ const certificateStack = new CertificateStack(app, 'PersonalWebsiteCertificateSt
 // Stack for the Website (e.g., in us-west-2)
 new PersonalWebsiteStack(app, 'PersonalWebsiteStack', {
   domainName: domainName,
-  certificateArn: certificateStack.certificateArnOutput.value, // Pass the ARN from the certificate stack
+  certificateArn: certificateStack.certificateArn,
   env: { 
     account: process.env.CDK_DEFAULT_ACCOUNT, 
     region: websiteRegion 

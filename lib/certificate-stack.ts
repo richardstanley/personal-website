@@ -9,7 +9,7 @@ export interface CertificateStackProps extends cdk.StackProps {
 }
 
 export class CertificateStack extends cdk.Stack {
-  public readonly certificateArnOutput: cdk.CfnOutput;
+  public readonly certificateArn: string;
 
   constructor(scope: Construct, id: string, props: CertificateStackProps) {
     super(scope, id, props);
@@ -29,10 +29,10 @@ export class CertificateStack extends cdk.Stack {
       validation: acm.CertificateValidation.fromDns(hostedZone),
     });
 
-    // Output the certificate ARN
-    this.certificateArnOutput = new cdk.CfnOutput(this, 'CertificateArn', {
+    this.certificateArn = certificate.certificateArn;
+
+    new cdk.CfnOutput(this, 'CertificateArn', {
       value: certificate.certificateArn,
-      exportName: 'PersonalWebsiteCertificateArn', // Export for potential cross-stack reference if needed differently
     });
   }
 } 

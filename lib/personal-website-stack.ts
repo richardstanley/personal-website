@@ -11,7 +11,6 @@ import * as path from 'path';
 
 export interface PersonalWebsiteStackProps extends cdk.StackProps {
   domainName: string;
-  subdomainName?: string; // e.g., 'www'
   certificateArn: string; // ARN of the ACM certificate from us-east-1
 }
 
@@ -19,8 +18,7 @@ export class PersonalWebsiteStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props: PersonalWebsiteStackProps) {
     super(scope, id, props);
 
-    const { domainName, subdomainName, certificateArn } = props;
-    const siteDomain = subdomainName ? `${subdomainName}.${domainName}` : domainName;
+    const { domainName, certificateArn } = props;
     const wwwDomain = `www.${domainName}`;
 
     // 1. Look up the Route 53 hosted zone
@@ -33,41 +31,51 @@ export class PersonalWebsiteStack extends cdk.Stack {
 
     // 3. S3 Bucket for website content
     const siteBucket = new s3.Bucket(this, 'SiteBucket', {
-      bucketName: `${this.account}-personal-website-${domainName.replace('.', '-')}`, // Globally unique name
-      publicReadAccess: false, // Access will be through CloudFront
+      bucketName: `${this.account}-personal-website-${domainName.replace('.', '-')}`,
       blockPublicAccess: s3.BlockPublicAccess.BLOCK_ALL,
-      removalPolicy: cdk.RemovalPolicy.DESTROY, // NOT recommended for production
-      autoDeleteObjects: true, // NOT recommended for production
+      removalPolicy: cdk.RemovalPolicy.DESTROY,
+      autoDeleteObjects: true,
     });
 
-    // 4. Origin Access Identity (OAI) for CloudFront
-    const originAccessIdentity = new cloudfront.OriginAccessIdentity(this, 'OAI');
-    siteBucket.grantRead(originAccessIdentity);
+    // 4. CloudFront Function: redirect www to apex
+    const wwwRedirectFunction = new cloudfront.Function(this, 'WwwRedirectFunction', {
+      runtime: cloudfront.FunctionRuntime.JS_2_0,
+      code: cloudfront.FunctionCode.fromInline(`
+function handler(event) {
+  var host = event.request.headers.host.value;
+  if (host === '${wwwDomain}') {
+    return {
+      statusCode: 301,
+      statusDescription: 'Moved Permanently',
+      headers: { location: { value: 'https://${domainName}' + event.request.uri } }
+    };
+  }
+  return event.request;
+}
+      `.trim()),
+    });
 
-    // 5. CloudFront Distribution
+    // 5. CloudFront Distribution (OAC via S3BucketOrigin — replaces legacy OAI)
     const distribution = new cloudfront.Distribution(this, 'SiteDistribution', {
       defaultRootObject: 'index.html',
       domainNames: [domainName, wwwDomain],
       certificate: certificate,
       minimumProtocolVersion: cloudfront.SecurityPolicyProtocol.TLS_V1_2_2021,
       defaultBehavior: {
-        origin: new origins.S3Origin(siteBucket, { originAccessIdentity }),
+        origin: origins.S3BucketOrigin.withOriginAccessControl(siteBucket),
         viewerProtocolPolicy: cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
         allowedMethods: cloudfront.AllowedMethods.ALLOW_GET_HEAD_OPTIONS,
         compress: true,
+        functionAssociations: [{
+          function: wwwRedirectFunction,
+          eventType: cloudfront.FunctionEventType.VIEWER_REQUEST,
+        }],
       },
-      // Optional: Redirect www to apex (e.g., www.richardstanley.net to richardstanley.net)
-      // You can implement this with a second behavior or a CloudFront Function.
-      // For simplicity, we'll create records for both and let the user decide or handle client-side.
-      // Or, configure one to redirect to the other, e.g. www to non-www:
-      // priceClass: cloudfront.PriceClass.PRICE_CLASS_100, // Optional: control cost
+      errorResponses: [
+        { httpStatus: 403, responseHttpStatus: 404, responsePagePath: '/index.html' },
+        { httpStatus: 404, responseHttpStatus: 404, responsePagePath: '/index.html' },
+      ],
     });
-    
-    // If you want to redirect www.richardstanley.net to richardstanley.net
-    // This is a common pattern.
-    // You might need a separate distribution or a Lambda@Edge/CloudFront Function for more complex redirects.
-    // For simple cases, ensuring both DNS records point to the same distribution often suffices,
-    // and you can handle canonical URL preference in your application/HTML.
 
     // 6. Route 53 Alias Records for CloudFront Distribution
     new route53.ARecord(this, 'SiteApexARecord', {
@@ -94,7 +102,7 @@ export class PersonalWebsiteStack extends cdk.Stack {
       target: route53.RecordTarget.fromAlias(new route53targets.CloudFrontTarget(distribution)),
     });
 
-    // 7. Deploy placeholder index.html
+    // 7. Deploy site content to S3
     new s3deploy.BucketDeployment(this, 'DeployWebsite', {
       sources: [s3deploy.Source.asset(path.join(__dirname, '..', 'site-content'))],
       destinationBucket: siteBucket,
@@ -109,7 +117,7 @@ export class PersonalWebsiteStack extends cdk.Stack {
     new cdk.CfnOutput(this, 'SiteURL', {
       value: `https://${domainName}`,
     });
-     new cdk.CfnOutput(this, 'WwwSiteURL', {
+    new cdk.CfnOutput(this, 'WwwSiteURL', {
       value: `https://${wwwDomain}`,
     });
   }
