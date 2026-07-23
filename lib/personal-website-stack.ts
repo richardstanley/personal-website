@@ -137,7 +137,31 @@ function handler(event) {
       target: route53.RecordTarget.fromAlias(new route53targets.CloudFrontTarget(distribution)),
     });
 
-    // 8. Deploy site content to S3 with tiered Cache-Control.
+    // 8. Domain hardening DNS records.
+    // CAA: only Amazon's CA may issue certificates for this domain.
+    new route53.CaaAmazonRecord(this, 'CaaAmazonRecord', {
+      zone: hostedZone,
+    });
+
+    // The domain sends no email: null MX (RFC 7505) + SPF -all + DMARC reject
+    // stop anyone from spoofing mail from @richardstanley.net.
+    new route53.MxRecord(this, 'NullMxRecord', {
+      zone: hostedZone,
+      values: [{ priority: 0, hostName: '.' }],
+    });
+
+    new route53.TxtRecord(this, 'SpfRecord', {
+      zone: hostedZone,
+      values: ['v=spf1 -all'],
+    });
+
+    new route53.TxtRecord(this, 'DmarcRecord', {
+      zone: hostedZone,
+      recordName: `_dmarc.${domainName}`,
+      values: ['v=DMARC1; p=reject; sp=reject; adkim=s; aspf=s'],
+    });
+
+    // 9. Deploy site content to S3 with tiered Cache-Control.
     // Three deployments share one source asset; prune is off so they don't delete each other's files.
     const siteSource = s3deploy.Source.asset(path.join(__dirname, '..', 'site-content'), {
       exclude: ['.DS_Store'],

@@ -92,26 +92,27 @@
     </script>
 </head>
 <body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
     <header id="header">
         <nav aria-label="Main navigation">
             <div class="logo">
                 <a href="#hero">Richard Stanley, CTO of Leyline Lending</a>
             </div>
-            <ul class="nav-links">
+            <ul class="nav-links" id="primary-navigation">
                 <li><a href="#hero">Home</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#projects">Projects</a></li>
                 <li><a href="#professional-links">Professional Links</a></li>
             </ul>
-            <div class="burger">
+            <button class="burger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="primary-navigation">
                 <div class="line1"></div>
                 <div class="line2"></div>
                 <div class="line3"></div>
-            </div>
+            </button>
         </nav>
     </header>
 
-    <main>
+    <main id="main-content" tabindex="-1">
         <section id="hero" class="hero-section">
             <div class="hero-content">
                 <h1>Richard Stanley</h1>

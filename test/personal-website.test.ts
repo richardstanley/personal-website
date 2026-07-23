@@ -148,11 +148,34 @@ describe('PersonalWebsiteStack', () => {
   });
 
   test('four Route53 alias records created (apex + www, A + AAAA)', () => {
-    template.resourceCountIs('AWS::Route53::RecordSet', 4);
     template.hasResourceProperties('AWS::Route53::RecordSet', { Type: 'A', Name: `${DOMAIN}.` });
     template.hasResourceProperties('AWS::Route53::RecordSet', { Type: 'AAAA', Name: `${DOMAIN}.` });
     template.hasResourceProperties('AWS::Route53::RecordSet', { Type: 'A', Name: `www.${DOMAIN}.` });
     template.hasResourceProperties('AWS::Route53::RecordSet', { Type: 'AAAA', Name: `www.${DOMAIN}.` });
+  });
+
+  test('domain hardening records: CAA, null MX, SPF, and DMARC', () => {
+    template.resourceCountIs('AWS::Route53::RecordSet', 8);
+    template.hasResourceProperties('AWS::Route53::RecordSet', {
+      Type: 'CAA',
+      Name: `${DOMAIN}.`,
+      ResourceRecords: ['0 issue "amazon.com"'],
+    });
+    template.hasResourceProperties('AWS::Route53::RecordSet', {
+      Type: 'MX',
+      Name: `${DOMAIN}.`,
+      ResourceRecords: ['0 .'],
+    });
+    template.hasResourceProperties('AWS::Route53::RecordSet', {
+      Type: 'TXT',
+      Name: `${DOMAIN}.`,
+      ResourceRecords: ['"v=spf1 -all"'],
+    });
+    template.hasResourceProperties('AWS::Route53::RecordSet', {
+      Type: 'TXT',
+      Name: `_dmarc.${DOMAIN}.`,
+      ResourceRecords: ['"v=DMARC1; p=reject; sp=reject; adkim=s; aspf=s"'],
+    });
   });
 });
 

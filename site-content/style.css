@@ -92,6 +92,40 @@ html {
     scroll-behavior: smooth;
 }
 
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Visually hidden until focused via keyboard */
+.skip-link {
+    position: fixed;
+    top: -100px;
+    left: 8px;
+    z-index: 2000;
+    padding: 10px 16px;
+    background: var(--surface);
+    color: var(--text);
+    border: 1.5px solid var(--border);
+    border-radius: 5px;
+    font-weight: 500;
+}
+
+.skip-link:focus {
+    top: 8px;
+}
+
+#main-content:focus {
+    outline: none;
+}
+
 body {
     font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
@@ -214,6 +248,9 @@ a:hover {
 .burger {
     display: none;
     cursor: pointer;
+    background: none;
+    border: none;
+    padding: 4px;
 }
 
 .burger div {

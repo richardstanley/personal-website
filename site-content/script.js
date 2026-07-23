@@ -1,4 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
+    const scrollBehavior = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
+
     // Smooth Scrolling for Navigation Links
     const navLinks = document.querySelectorAll('nav ul li a[href^="#"]');
     navLinks.forEach(link => {
@@ -17,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 window.scrollTo({
                     top: offsetPosition,
-                    behavior: "smooth"
+                    behavior: scrollBehavior
                 });
             }
             // Close mobile nav if open
@@ -36,7 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (targetElement) {
                  window.scrollTo({
                     top: 0, // Hero section is at the very top before header adjustment
-                    behavior: "smooth"
+                    behavior: scrollBehavior
                 });
             }
         });
@@ -48,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
         backToTopLink.addEventListener('click', function(e) {
             e.preventDefault();
             document.querySelector(this.getAttribute('href')).scrollIntoView({
-                behavior: 'smooth'
+                behavior: scrollBehavior
             });
         });
     }
@@ -61,6 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const toggleNav = () => {
         // Toggle Nav
         nav.classList.toggle('nav-active');
+        burger.setAttribute('aria-expanded', nav.classList.contains('nav-active'));
 
         // Animate Links
         navLinkItems.forEach((link, index) => {
