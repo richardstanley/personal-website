@@ -1,14 +1,13 @@
 # Richard Stanley
 
-> Personal website of Richard Stanley, Chief Technology Officer of Leyline Lending and RateDiver, part of the SunnyHill Financial family of companies — a technology leader focused on real estate lending technology, AI/ML, and cloud architecture.
+> Personal website of Richard Stanley, Chief Technology Officer of Leyline Lending and RateDiver — a technology leader focused on real estate lending technology, AI/ML, and cloud architecture.
 
 Richard Stanley is a technology leader with software engineering experience architecting globally scalable systems at AWS and Capital One. He holds an MBA from UCLA and a BS from UC Berkeley, and is a licensed loan officer and an AI/ML practitioner.
 
 ## Roles
 
-- Chief Technology Officer, Leyline Lending: building the commercial lending capability for the SunnyHill Financial family of companies.
+- Chief Technology Officer, Leyline Lending: a new software company building technology to manage commercial real estate assets.
 - Chief Technology Officer, [RateDiver](https://ratediver.com): the custom software company behind the MyLeadBuy platform.
-- Part of the [SunnyHill Financial](https://www.sunnyhillfinancial.com/) family of companies (NMLS #1708856), led by CEO Tyler Flora.
 
 ## Projects
 
