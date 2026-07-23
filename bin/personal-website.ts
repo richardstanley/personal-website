@@ -13,9 +13,9 @@ const websiteRegion = 'us-west-2';
 // Stack for the ACM Certificate (must be in us-east-1)
 const certificateStack = new CertificateStack(app, 'PersonalWebsiteCertificateStack', {
   domainName: domainName,
-  env: { 
-    account: process.env.CDK_DEFAULT_ACCOUNT, 
-    region: certificateRegion 
+  env: {
+    account: account,
+    region: certificateRegion
   },
   crossRegionReferences: true, // Important for cross-region certificate usage
 });
@@ -24,9 +24,9 @@ const certificateStack = new CertificateStack(app, 'PersonalWebsiteCertificateSt
 new PersonalWebsiteStack(app, 'PersonalWebsiteStack', {
   domainName: domainName,
   certificateArn: certificateStack.certificateArn,
-  env: { 
-    account: process.env.CDK_DEFAULT_ACCOUNT, 
-    region: websiteRegion 
+  env: {
+    account: account,
+    region: websiteRegion
   },
   crossRegionReferences: true, // Important for cross-region certificate usage
 });
