@@ -37,18 +37,56 @@
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "Person",
-      "name": "Richard Stanley",
-      "url": "https://richardstanley.net",
-      "image": "https://richardstanley.net/RCS.jpg",
-      "jobTitle": "Chief Technology Officer",
-      "worksFor": {
-        "@type": "Organization",
-        "name": "Leyline Lending"
-      },
-      "sameAs": [
-        "https://www.linkedin.com/in/stanley943/",
-        "https://github.com/richardstanley"
+      "@graph": [
+        {
+          "@type": "ProfilePage",
+          "@id": "https://richardstanley.net/#profilepage",
+          "url": "https://richardstanley.net/",
+          "name": "Richard Stanley - CTO of Leyline Lending",
+          "dateModified": "2026-07-23",
+          "isPartOf": { "@id": "https://richardstanley.net/#website" },
+          "mainEntity": { "@id": "https://richardstanley.net/#person" }
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://richardstanley.net/#website",
+          "url": "https://richardstanley.net/",
+          "name": "Richard Stanley",
+          "publisher": { "@id": "https://richardstanley.net/#person" }
+        },
+        {
+          "@type": "Person",
+          "@id": "https://richardstanley.net/#person",
+          "name": "Richard Stanley",
+          "url": "https://richardstanley.net/",
+          "image": "https://richardstanley.net/RCS.jpg",
+          "jobTitle": "Chief Technology Officer",
+          "worksFor": {
+            "@type": "Organization",
+            "name": "Leyline Lending"
+          },
+          "description": "Technology leader with software engineering experience architecting globally scalable systems at AWS and Capital One. MBA from UCLA, BS from UC Berkeley, licensed loan officer, and AI/ML practitioner.",
+          "alumniOf": [
+            {
+              "@type": "CollegeOrUniversity",
+              "name": "University of California, Los Angeles"
+            },
+            {
+              "@type": "CollegeOrUniversity",
+              "name": "University of California, Berkeley"
+            }
+          ],
+          "knowsAbout": [
+            "Software architecture",
+            "Cloud computing",
+            "Artificial intelligence and machine learning",
+            "Mortgage and real estate lending technology"
+          ],
+          "sameAs": [
+            "https://www.linkedin.com/in/stanley943/",
+            "https://github.com/richardstanley"
+          ]
+        }
       ]
     }
     </script>

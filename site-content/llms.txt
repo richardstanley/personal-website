@@ -1,0 +1,19 @@
+# Richard Stanley
+
+> Personal website of Richard Stanley, Chief Technology Officer of Leyline Lending — a technology leader focused on real estate lending technology, AI/ML, and cloud architecture.
+
+Richard Stanley is a technology leader with software engineering experience architecting globally scalable systems at AWS and Capital One. He holds an MBA from UCLA and a BS from UC Berkeley, and is a licensed loan officer and an AI/ML practitioner. He currently serves as CTO of Leyline Lending.
+
+## Projects
+
+- [MyLeadBuy](https://myleadbuy.com): A leads platform for the real estate lending and sales industry.
+- [Miliare Referral Network](https://miliarenetwork.com): A referral network and payment platform enabling 14,000 agents to pass referrals between partner companies that can meet their clients' service needs.
+
+## Professional Links
+
+- [LinkedIn](https://www.linkedin.com/in/stanley943/): Professional profile
+- [GitHub](https://github.com/richardstanley): Open-source work and code
+
+## Site
+
+- [Home](https://richardstanley.net/): Single-page personal site with About, Projects, and Professional Links sections.

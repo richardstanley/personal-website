@@ -11,6 +11,7 @@ This project sets up and deploys a simple, professional, single-page static webs
 *   **Single-Page Application**: The website content is a responsive single-page design built with HTML, CSS, and vanilla JavaScript, with automatic dark mode via `prefers-color-scheme`.
 *   **Security Headers**: A CloudFront `ResponseHeadersPolicy` adds HSTS, a strict Content-Security-Policy, `X-Content-Type-Options`, frame denial, and a referrer policy to every response.
 *   **Performance**: HTTP/3 enabled, self-hosted fonts (no third-party requests), and tiered `Cache-Control`: immutable for fonts/images, one day for CSS/JS, no-cache for `index.html`.
+*   **AI Search Optimization**: An `llms.txt` summary for AI agents, explicit AI-crawler allowances in `robots.txt`, and rich schema.org structured data (ProfilePage/WebSite/Person graph) for answer engines.
 *   **Automated Deployment**: Infrastructure and website content are deployed via AWS CDK, either locally or through the GitHub Actions deploy workflow.
 
 ## Project Structure
