@@ -1,11 +1,11 @@
 {
-    "name": "Richard Stanley, CTO of TruQuote",
-    "short_name": "TruQuote",
+    "name": "Richard Stanley, CTO of Leyline Lending",
+    "short_name": "R. Stanley",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#FDFBF6",
     "theme_color": "#2E86C1",
-    "description": "Personal website for Richard Stanley, CTO of TruQuote.",
+    "description": "Personal website for Richard Stanley, CTO of Leyline Lending.",
     "icons": [
       {
         "src": "favicon-192.png",

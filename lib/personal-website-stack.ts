@@ -55,17 +55,52 @@ function handler(event) {
       `.trim()),
     });
 
-    // 5. CloudFront Distribution (OAC via S3BucketOrigin — replaces legacy OAI)
+    // 5. Security headers applied to every response.
+    // CSP can be fully self-referential because fonts/styles/scripts are all self-hosted.
+    const securityHeaders = new cloudfront.ResponseHeadersPolicy(this, 'SecurityHeaders', {
+      securityHeadersBehavior: {
+        contentSecurityPolicy: {
+          contentSecurityPolicy: [
+            "default-src 'none'",
+            "script-src 'self'",
+            "style-src 'self'",
+            "img-src 'self'",
+            "font-src 'self'",
+            "manifest-src 'self'",
+            "base-uri 'none'",
+            "form-action 'none'",
+            "frame-ancestors 'none'",
+          ].join('; '),
+          override: true,
+        },
+        contentTypeOptions: { override: true },
+        frameOptions: { frameOption: cloudfront.HeadersFrameOption.DENY, override: true },
+        referrerPolicy: {
+          referrerPolicy: cloudfront.HeadersReferrerPolicy.STRICT_ORIGIN_WHEN_CROSS_ORIGIN,
+          override: true,
+        },
+        strictTransportSecurity: {
+          accessControlMaxAge: cdk.Duration.days(730),
+          includeSubdomains: true,
+          preload: true,
+          override: true,
+        },
+      },
+    });
+
+    // 6. CloudFront Distribution (OAC via S3BucketOrigin — replaces legacy OAI)
     const distribution = new cloudfront.Distribution(this, 'SiteDistribution', {
       defaultRootObject: 'index.html',
       domainNames: [domainName, wwwDomain],
       certificate: certificate,
       minimumProtocolVersion: cloudfront.SecurityPolicyProtocol.TLS_V1_2_2021,
+      httpVersion: cloudfront.HttpVersion.HTTP2_AND_3,
       defaultBehavior: {
         origin: origins.S3BucketOrigin.withOriginAccessControl(siteBucket),
         viewerProtocolPolicy: cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
         allowedMethods: cloudfront.AllowedMethods.ALLOW_GET_HEAD_OPTIONS,
         compress: true,
+        responseHeadersPolicy: securityHeaders,
         functionAssociations: [{
           function: wwwRedirectFunction,
           eventType: cloudfront.FunctionEventType.VIEWER_REQUEST,
@@ -77,7 +112,7 @@ function handler(event) {
       ],
     });
 
-    // 6. Route 53 Alias Records for CloudFront Distribution
+    // 7. Route 53 Alias Records for CloudFront Distribution
     new route53.ARecord(this, 'SiteApexARecord', {
       zone: hostedZone,
       recordName: domainName,
@@ -102,11 +137,38 @@ function handler(event) {
       target: route53.RecordTarget.fromAlias(new route53targets.CloudFrontTarget(distribution)),
     });
 
-    // 7. Deploy site content to S3
-    new s3deploy.BucketDeployment(this, 'DeployWebsite', {
-      sources: [s3deploy.Source.asset(path.join(__dirname, '..', 'site-content'))],
+    // 8. Deploy site content to S3 with tiered Cache-Control.
+    // Three deployments share one source asset; prune is off so they don't delete each other's files.
+    const siteSource = s3deploy.Source.asset(path.join(__dirname, '..', 'site-content'), {
+      exclude: ['.DS_Store'],
+    });
+    const longLivedPatterns = ['fonts/*', '*.png', '*.jpg', '*.webp', '*.svg', '*.ico'];
+
+    new s3deploy.BucketDeployment(this, 'DeployLongLivedAssets', {
+      sources: [siteSource],
       destinationBucket: siteBucket,
-      distribution: distribution, // Invalidate CloudFront cache on deploy
+      exclude: ['*'],
+      include: longLivedPatterns,
+      cacheControl: [s3deploy.CacheControl.fromString('public, max-age=31536000, immutable')],
+      prune: false,
+    });
+
+    new s3deploy.BucketDeployment(this, 'DeployShortLivedAssets', {
+      sources: [siteSource],
+      destinationBucket: siteBucket,
+      exclude: ['index.html', ...longLivedPatterns],
+      cacheControl: [s3deploy.CacheControl.fromString('public, max-age=86400')],
+      prune: false,
+    });
+
+    new s3deploy.BucketDeployment(this, 'DeployIndexHtml', {
+      sources: [siteSource],
+      destinationBucket: siteBucket,
+      exclude: ['*'],
+      include: ['index.html'],
+      cacheControl: [s3deploy.CacheControl.fromString('public, max-age=0, must-revalidate')],
+      prune: false,
+      distribution: distribution, // one invalidation per deploy — all three deployments update together
       distributionPaths: ['/*'],
     });
 

@@ -1,5 +1,6 @@
 *.js
 !jest.config.js
+!site-content/*.js
 *.d.ts
 node_modules
 .pnpm-store/

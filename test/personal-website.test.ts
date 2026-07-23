@@ -1,5 +1,5 @@
 import * as cdk from 'aws-cdk-lib';
-import { Template } from 'aws-cdk-lib/assertions';
+import { Match, Template } from 'aws-cdk-lib/assertions';
 import { PersonalWebsiteStack } from '../lib/personal-website-stack';
 import { CertificateStack } from '../lib/certificate-stack';
 
@@ -88,6 +88,63 @@ describe('PersonalWebsiteStack', () => {
   test('OAC is used instead of legacy OAI', () => {
     template.resourceCountIs('AWS::CloudFront::OriginAccessControl', 1);
     template.resourceCountIs('AWS::CloudFront::CloudFrontOriginAccessIdentity', 0);
+  });
+
+  test('CloudFront distribution enables HTTP/3', () => {
+    template.hasResourceProperties('AWS::CloudFront::Distribution', {
+      DistributionConfig: {
+        HttpVersion: 'http2and3',
+      },
+    });
+  });
+
+  test('security headers policy sets HSTS, CSP, nosniff, and frame denial', () => {
+    template.hasResourceProperties('AWS::CloudFront::ResponseHeadersPolicy', {
+      ResponseHeadersPolicyConfig: {
+        SecurityHeadersConfig: {
+          StrictTransportSecurity: {
+            AccessControlMaxAgeSec: 63072000,
+            IncludeSubdomains: true,
+            Preload: true,
+            Override: true,
+          },
+          ContentSecurityPolicy: {
+            ContentSecurityPolicy: Match.stringLikeRegexp("default-src 'none'"),
+            Override: true,
+          },
+          ContentTypeOptions: { Override: true },
+          FrameOptions: { FrameOption: 'DENY', Override: true },
+          ReferrerPolicy: {
+            ReferrerPolicy: 'strict-origin-when-cross-origin',
+            Override: true,
+          },
+        },
+      },
+    });
+  });
+
+  test('security headers policy is attached to the default behavior', () => {
+    template.hasResourceProperties('AWS::CloudFront::Distribution', {
+      DistributionConfig: {
+        DefaultCacheBehavior: {
+          ResponseHeadersPolicyId: Match.anyValue(),
+        },
+      },
+    });
+  });
+
+  test('site deploys with tiered Cache-Control (immutable assets, daily assets, no-cache html)', () => {
+    template.resourceCountIs('Custom::CDKBucketDeployment', 3);
+    template.hasResourceProperties('Custom::CDKBucketDeployment', {
+      SystemMetadata: { 'cache-control': 'public, max-age=31536000, immutable' },
+    });
+    template.hasResourceProperties('Custom::CDKBucketDeployment', {
+      SystemMetadata: { 'cache-control': 'public, max-age=86400' },
+    });
+    template.hasResourceProperties('Custom::CDKBucketDeployment', {
+      SystemMetadata: { 'cache-control': 'public, max-age=0, must-revalidate' },
+      DistributionId: Match.anyValue(),
+    });
   });
 
   test('four Route53 alias records created (apex + www, A + AAAA)', () => {

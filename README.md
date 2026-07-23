@@ -8,8 +8,10 @@ This project sets up and deploys a simple, professional, single-page static webs
 *   **HTTPS and CDN**: CloudFront distribution to serve content securely over HTTPS and cache it globally.
 *   **Custom Domain**: Configures Route 53 to point your custom domain (e.g., `richardstanley.net`) to the CloudFront distribution.
 *   **Cross-Region Certificate**: ACM certificate for HTTPS is provisioned in `us-east-1` (required for CloudFront), while the main website resources can be in a different region (e.g., `us-west-2`).
-*   **Single-Page Application**: The website content is a responsive single-page design built with HTML, CSS, and vanilla JavaScript.
-*   **Automated Deployment**: Infrastructure and website content are deployed via AWS CDK.
+*   **Single-Page Application**: The website content is a responsive single-page design built with HTML, CSS, and vanilla JavaScript, with automatic dark mode via `prefers-color-scheme`.
+*   **Security Headers**: A CloudFront `ResponseHeadersPolicy` adds HSTS, a strict Content-Security-Policy, `X-Content-Type-Options`, frame denial, and a referrer policy to every response.
+*   **Performance**: HTTP/3 enabled, self-hosted fonts (no third-party requests), and tiered `Cache-Control`: immutable for fonts/images, one day for CSS/JS, no-cache for `index.html`.
+*   **Automated Deployment**: Infrastructure and website content are deployed via AWS CDK, either locally or through the GitHub Actions deploy workflow.
 
 ## Project Structure
 
@@ -42,9 +44,9 @@ This project sets up and deploys a simple, professional, single-page static webs
     # git clone ...
     # cd personal-website
     ```
-2.  **Install Dependencies**:
+2.  **Install Dependencies** (this project uses pnpm — see `packageManager` in `package.json`):
     ```bash
-    npm install
+    pnpm install
     ```
 3.  **Configure Domain and Regions**:
     *   Open `bin/personal-website.ts`.
@@ -89,6 +91,20 @@ This project sets up and deploys a simple, professional, single-page static webs
     cdk deploy --all
     ```
     The `BucketDeployment` construct in `PersonalWebsiteStack` will automatically update the files in the S3 bucket and invalidate the CloudFront cache.
+
+## CI/CD (GitHub Actions)
+
+Two workflows live in `.github/workflows/`:
+
+*   `ci.yml`: runs build, lint, and tests on every pull request and push to `main`.
+*   `deploy.yml`: on push to `main` (or manual dispatch), re-runs the checks and then `cdk deploy --all` using OIDC — no long-lived AWS keys in GitHub.
+
+One-time setup for deploys:
+
+1.  In the AWS account that hosts the site, create an IAM OIDC identity provider for `token.actions.githubusercontent.com` (audience `sts.amazonaws.com`).
+2.  Create an IAM role trusting that provider, with the trust condition scoped to this repo, e.g. `"token.actions.githubusercontent.com:sub": "repo:richardstanley/personal-website:ref:refs/heads/main"`.
+3.  Give the role permission to assume the CDK bootstrap roles: `sts:AssumeRole` on `arn:aws:iam::<ACCOUNT_ID>:role/cdk-*`.
+4.  Save the role ARN as the repository secret `AWS_DEPLOY_ROLE_ARN`.
 
 ## Useful CDK Commands
 

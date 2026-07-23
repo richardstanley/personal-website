@@ -1,4 +1,86 @@
-@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Inter:wght@400;500&display=swap');
+/* Self-hosted variable fonts (latin subset) — replaces render-blocking Google Fonts @import */
+@font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 100 900;
+    font-display: swap;
+    src: url('fonts/inter-latin.woff2') format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+    font-family: 'Merriweather';
+    font-style: normal;
+    font-weight: 300 900;
+    font-display: swap;
+    src: url('fonts/merriweather-latin.woff2') format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* MTG 2010 artifact/white/blue palette (see AGENTS.md) */
+:root {
+    color-scheme: light dark;
+
+    --bg-grad-start: #D6D7D9;
+    --bg-grad-mid: #E3E4E8;
+    --bg-grad-end: #BFC2C7;
+
+    --surface: #FDFBF6;          /* parchment */
+    --surface-edge: #E8E3D3;
+
+    --text: #111;
+    --border: #111;
+
+    --accent: #2E86C1;
+    --accent-light: #5DADE2;
+    --accent-pale: #B3D4EE;
+
+    --card-start: #E8E9EB;       /* artifact grey */
+    --card-end: #BFC2C7;
+
+    --hero-start: #5DADE2;
+    --hero-end: #2E86C1;
+    --hero-text: #111;
+
+    --nav-bg: #ffffff;
+
+    --shadow: rgba(0, 0, 0, 0.08);
+    --shadow-strong: rgba(0, 0, 0, 0.15);
+    --shadow-accent: rgba(46, 134, 193, 0.10);
+}
+
+/* Dark variant: same card frames, nighttime palette; borders go silver so frames stay visible */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg-grad-start: #17181B;
+        --bg-grad-mid: #1E2024;
+        --bg-grad-end: #121316;
+
+        --surface: #26231D;
+        --surface-edge: #1B1915;
+
+        --text: #E9E5DA;
+        --border: #9BA1AA;
+
+        --accent: #5DADE2;
+        --accent-light: #85C1E9;
+        --accent-pale: #B3D4EE;
+
+        --card-start: #2A2D31;
+        --card-end: #1F2225;
+
+        --hero-start: #1B4F72;
+        --hero-end: #123A54;
+        --hero-text: #E9E5DA;
+
+        --nav-bg: #26231D;
+
+        --shadow: rgba(0, 0, 0, 0.35);
+        --shadow-strong: rgba(0, 0, 0, 0.5);
+        --shadow-accent: rgba(0, 0, 0, 0.35);
+    }
+}
+
 /* Global Resets & Base Styles */
 * {
     margin: 0;
@@ -13,8 +95,8 @@ html {
 body {
     font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
-    color: #111; /* more black, like MTG card text */
-    background: linear-gradient(135deg, #D6D7D9 0%, #E3E4E8 40%, #BFC2C7 100%, #E3E4E8 160%);
+    color: var(--text);
+    background: linear-gradient(135deg, var(--bg-grad-start) 0%, var(--bg-grad-mid) 40%, var(--bg-grad-end) 100%);
     background-repeat: no-repeat;
     background-attachment: fixed;
     padding-top: 70px;
@@ -30,7 +112,7 @@ body {
 h1, h2, h3 {
     margin-bottom: 0.8em;
     font-family: 'Merriweather', serif;
-    color: #111; /* more black, like MTG card headers */
+    color: var(--text);
 }
 
 h1 {
@@ -49,31 +131,29 @@ h3 {
 
 p {
     margin-bottom: 1em;
-    color: #111; /* more black, like MTG card text */
+    color: var(--text);
 }
 
 a {
     text-decoration: none;
-    color: #2E86C1;
+    color: var(--accent);
 }
 
 a:hover {
-    color: #5DADE2;
+    color: var(--accent-light);
 }
 
 /* Header & Navigation */
 #header {
-    background: linear-gradient(180deg, #FDFBF6 80%, #E8E3D3 100%); /* parchment white gradient */
-    color: #212529;
-    border-bottom: 2px solid #111; /* thinner black border */
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    background: linear-gradient(180deg, var(--surface) 80%, var(--surface-edge) 100%);
+    border-bottom: 2px solid var(--border);
+    box-shadow: 0 2px 8px var(--shadow);
     padding: 10px 0;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     z-index: 1000;
-    transition: background-color 0.3s ease;
 }
 
 #header nav {
@@ -83,13 +163,12 @@ a:hover {
     width: 90%;
     max-width: 1100px;
     margin: auto;
-    border-bottom: none;
 }
 
 #header .logo a {
     font-size: 1.8em;
     font-weight: bold;
-    color: #111; /* more black for the site name */
+    color: var(--text);
     font-family: 'Merriweather', serif;
 }
 
@@ -103,7 +182,7 @@ a:hover {
 }
 
 #header .nav-links a {
-    color: #111; /* more black for nav links */
+    color: var(--text);
     font-weight: 500;
     padding: 5px 0;
     position: relative;
@@ -118,20 +197,18 @@ a:hover {
     display: block;
     margin-top: 5px;
     right: 0;
-    background: #2E86C1;
+    background: var(--accent);
     transition: width 0.3s ease;
-    -webkit-transition: width 0.3s ease;
 }
 
 #header .nav-links a:hover::after {
     width: 100%;
     left: 0;
-    background-color: #2E86C1;
 }
 
 #header .nav-links a:hover,
 #header .nav-links a.active {
-    color: #2E86C1;
+    color: var(--accent);
 }
 
 .burger {
@@ -142,20 +219,19 @@ a:hover {
 .burger div {
     width: 25px;
     height: 3px;
-    background-color: #2E86C1;
+    background-color: var(--accent);
     margin: 5px;
     transition: all 0.3s ease;
 }
 
 /* Hero Section */
 .hero-section {
-    background: linear-gradient(135deg, #5DADE2 0%, #2E86C1 100%);
-    color: #fff;
-    border: 2px solid #111;
+    background: linear-gradient(135deg, var(--hero-start) 0%, var(--hero-end) 100%);
+    border: 2px solid var(--border);
     border-radius: 12px;
-    margin: 32px 0 32px 0;
-    box-shadow: 0 4px 16px rgba(46,134,193,0.10);
-    padding: 48px 32px 40px 32px;
+    margin: 32px 0;
+    box-shadow: 0 4px 16px var(--shadow-accent);
+    padding: 48px 32px 40px;
     height: calc(100vh - 70px); /* Full viewport height minus header */
     display: flex;
     flex-direction: column;
@@ -164,9 +240,11 @@ a:hover {
     text-align: center;
 }
 
-.hero-section h1, .hero-section h2 {
-    color: #fff;
-    text-shadow: 0 2px 8px rgba(46,134,193,0.10);
+.hero-section h1,
+.hero-section h2,
+.hero-section .tagline,
+.hero-section a.cta-button {
+    color: var(--hero-text);
 }
 
 .hero-section h1 {
@@ -182,41 +260,33 @@ a:hover {
 .hero-section .tagline {
     font-size: 1.3em;
     margin-bottom: 1.5em;
-    color: #B3D4EE; /* Updated - Lighter blue for contrast */
 }
 
 /* Content Sections */
 .content-section {
-    padding: 60px 0;
-    background-color: #FAF8F0;
-    border: 1.5px solid #111;
+    background: linear-gradient(180deg, var(--surface) 90%, var(--surface-edge) 100%);
+    border: 1.5px solid var(--border);
     border-radius: 10px;
     margin-bottom: 40px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-    padding: 48px 32px 40px 32px;
-    background: linear-gradient(180deg, #FDFBF6 90%, #E8E3D3 100%);
-}
-
-.content-section.alt-bg {
-    background-color: #FDFBF6;
+    box-shadow: 0 2px 8px var(--shadow);
+    padding: 48px 32px 40px;
 }
 
 /* About Section */
 .about-content {
     display: flex;
-    align-items: center; /* Center vertically */
+    align-items: center;
     gap: 30px;
 }
 
 .profile-pic {
     align-self: center;
-    margin-bottom: 0;
-    width: 200px; /* Adjust as needed */
+    width: 200px;
     height: 200px;
-    border-radius: 50%; /* Circular image */
-    object-fit: cover; /* Ensure the image covers the area without distortion */
-    border: 1.5px solid #111;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.10);
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1.5px solid var(--border);
+    box-shadow: 0 4px 12px var(--shadow);
 }
 
 .about-content div {
@@ -231,35 +301,46 @@ a:hover {
 }
 
 .project-card {
-    background: linear-gradient(135deg, #E8E9EB 80%, #BFC2C7 100%);
-    border: 1.5px solid #111;
+    background: linear-gradient(135deg, var(--card-start) 80%, var(--card-end) 100%);
+    border: 1.5px solid var(--border);
     border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-    padding: 36px 28px 28px 28px;
+    box-shadow: 0 4px 12px var(--shadow);
+    padding: 36px 28px 28px;
     margin-bottom: 24px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .project-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 20px var(--shadow-strong);
 }
 
 .project-card h3 {
-    color: #111; /* more black for project card headers */
     font-family: 'Merriweather', serif;
     margin-bottom: 0.7em;
 }
 
-.project-card strong {
-    color: #2F353A;
+/* Miliare Referral card matches the hero frame */
+.project-card.miliare-referral {
+    background: linear-gradient(135deg, var(--hero-start) 0%, var(--hero-end) 100%);
 }
 
-/* Resume & Contact Section */
-.text-center {
-    text-align: center;
+.project-card.miliare-referral h3,
+.project-card.miliare-referral p {
+    color: var(--hero-text);
 }
 
+.project-card.miliare-referral a.cta-button {
+    background: linear-gradient(135deg, var(--card-start) 80%, var(--card-end) 100%);
+}
+
+.project-card.miliare-referral a.cta-button:hover {
+    background: linear-gradient(135deg, var(--card-end) 0%, var(--card-start) 100%);
+    color: var(--accent);
+    border-color: var(--accent);
+}
+
+/* Contact / Professional Links */
 .contact-links {
     display: flex;
     justify-content: center;
@@ -270,57 +351,54 @@ a:hover {
 /* Buttons */
 .cta-button, .contact-link-btn {
     display: inline-block;
-    background: linear-gradient(135deg, #E8E9EB 80%, #BFC2C7 100%); /* artifact grey gradient */
-    color: #111;
-    border: 1.5px solid #111;
+    background: linear-gradient(135deg, var(--card-start) 80%, var(--card-end) 100%);
+    color: var(--text);
+    border: 1.5px solid var(--border);
     padding: 12px 25px;
     border-radius: 5px;
     font-weight: bold;
     text-transform: uppercase;
     letter-spacing: 0.5px;
     transition: background 0.3s ease, color 0.2s, transform 0.2s;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 5px var(--shadow);
 }
 
 .cta-button:hover, .contact-link-btn:hover {
-    background: linear-gradient(135deg, #BFC2C7 0%, #E8E9EB 100%);
-    color: #fff;
+    background: linear-gradient(135deg, var(--card-end) 0%, var(--card-start) 100%);
     transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    box-shadow: 0 4px 8px var(--shadow-strong);
 }
 
 .contact-link-btn {
-    background: linear-gradient(135deg, #5DADE2 0%, #2E86C1 100%);
-    color: #111;
-    border: 1.5px solid #111;
+    background: linear-gradient(135deg, var(--hero-start) 0%, var(--hero-end) 100%);
+    color: var(--hero-text);
 }
 
 .contact-link-btn:hover {
-    background: linear-gradient(135deg, #B3D4EE 0%, #5DADE2 100%);
+    background: linear-gradient(135deg, var(--accent-pale) 0%, var(--accent-light) 100%);
     color: #111;
 }
 
 /* Footer */
 #footer {
-    background: linear-gradient(180deg, #5DADE2 80%, #2E86C1 100%);
-    color: #111;
+    background: linear-gradient(180deg, var(--hero-start) 80%, var(--hero-end) 100%);
     text-align: center;
     padding: 30px 0;
-    border-top: 2px solid #111;
-    box-shadow: 0 -2px 8px rgba(46,134,193,0.10);
+    border-top: 2px solid var(--border);
+    box-shadow: 0 -2px 8px var(--shadow-accent);
 }
 
 #footer p {
     margin-bottom: 0.5em;
-    color: #111;
+    color: var(--hero-text);
 }
 
 #footer a {
-    color: #111;
+    color: var(--hero-text);
 }
 
 #footer a:hover {
-    color: #2E86C1;
+    color: var(--accent-pale);
 }
 
 .back-to-top {
@@ -332,11 +410,12 @@ a:hover {
     body {
         padding-top: 60px; /* Adjust for smaller header */
     }
+
     .nav-links {
         position: fixed;
         right: 0;
         top: 60px; /* Height of the header */
-        background-color: #ffffff; /* Kept for mobile nav */
+        background-color: var(--nav-bg);
         height: calc(100vh - 60px);
         width: 60%;
         flex-direction: column;
@@ -345,7 +424,7 @@ a:hover {
         padding-top: 30px;
         transform: translateX(100%);
         transition: transform 0.5s ease-in-out;
-        box-shadow: -2px 0 5px rgba(0,0,0,0.1);
+        box-shadow: -2px 0 5px var(--shadow);
     }
 
     .nav-links.nav-active {
@@ -391,7 +470,7 @@ a:hover {
 
     .about-content {
         flex-direction: column;
-        align-items: center; /* Center items when stacked */
+        align-items: center;
         text-align: center;
     }
 
@@ -407,19 +486,20 @@ a:hover {
         font-size: 1.8em;
     }
 
-    .burger div {
-        width: 25px;
-        height: 3px;
-        background-color: #2E86C1;
-        margin: 5px;
-        transition: all 0.3s ease;
+    .content-section, .hero-section {
+        padding: 28px 8px 24px;
     }
 
-    .content-section, #about.content-section, #projects.content-section, .hero-section {
-        padding: 28px 8px 24px 8px;
-    }
     .project-card {
-        padding: 20px 8px 16px 8px;
+        padding: 20px 8px 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .contact-links {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
     }
 }
 
@@ -432,54 +512,5 @@ a:hover {
     to {
         opacity: 1;
         transform: translateX(0px);
-    }
-}
-
-/* HERO SECTION TEXT - Black Like Card */
-.hero-section h1, .hero-section h2, .hero-section .tagline, .hero-section a.cta-button {
-    color: #111;
-    text-shadow: none;
-}
-
-/* MILIARE REFERRAL PROJECT CARD - Match Hero Card Style */
-.project-card.miliare-referral {
-    background: linear-gradient(135deg, #5DADE2 0%, #2E86C1 100%);
-    border: 1.5px solid #111;
-    color: #111;
-}
-
-.project-card.miliare-referral h3,
-.project-card.miliare-referral p {
-    color: #111;
-}
-
-.project-card.miliare-referral a.cta-button {
-    background: linear-gradient(135deg, #E8E9EB 80%, #BFC2C7 100%);
-    color: #111;
-    border: 1.5px solid #111;
-}
-
-.project-card.miliare-referral a.cta-button:hover {
-    background: linear-gradient(135deg, #BFC2C7 0%, #E8E9EB 100%);
-    color: #2E86C1;
-    border: 1.5px solid #2E86C1;
-}
-
-/* Professional Links Card */
-.professional-links-card {
-    background: none;
-    border: none;
-    border-radius: 0;
-    box-shadow: none;
-    padding: 0;
-    margin-bottom: 24px;
-    text-align: center;
-}
-
-@media (max-width: 480px) {
-    .contact-links {
-        flex-direction: column;
-        align-items: center;
-        gap: 20px;
     }
 }
