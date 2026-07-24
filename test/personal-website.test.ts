@@ -169,7 +169,10 @@ describe('PersonalWebsiteStack', () => {
     template.hasResourceProperties('AWS::Route53::RecordSet', {
       Type: 'TXT',
       Name: `${DOMAIN}.`,
-      ResourceRecords: ['"v=spf1 -all"'],
+      ResourceRecords: [
+        '"v=spf1 -all"',
+        '"google-site-verification=NGNdKOAZZbY6xtR0IXFTOfxgEpaBiMsZ2YiKFcZlPe8"',
+      ],
     });
     template.hasResourceProperties('AWS::Route53::RecordSet', {
       Type: 'TXT',

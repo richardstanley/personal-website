@@ -150,9 +150,13 @@ function handler(event) {
       values: [{ priority: 0, hostName: '.' }],
     });
 
+    // Apex TXT record set holds both values — DNS allows one TXT set per name.
     new route53.TxtRecord(this, 'SpfRecord', {
       zone: hostedZone,
-      values: ['v=spf1 -all'],
+      values: [
+        'v=spf1 -all',
+        'google-site-verification=NGNdKOAZZbY6xtR0IXFTOfxgEpaBiMsZ2YiKFcZlPe8',
+      ],
     });
 
     new route53.TxtRecord(this, 'DmarcRecord', {
